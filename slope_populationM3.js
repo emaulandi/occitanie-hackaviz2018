@@ -32,7 +32,7 @@ var titleB2 = d3.select("#C-chart")
 		.attr("class","description")
 		//.attr("transform", "translate(" + 0 + "," + 0 + ")")
 		.append("text")
-		.text("La proportion la plus élevée d'habitants passe des villages en 1968 (40% de la population) au bourgs et petites villes en 2014");
+		.text("Les villages représentaient la plus grande proportion d'habitants en 1968, mais les bourgs et petites villes sont maintenant prépondérantes en proportion");
 		
 var text = d3.selectAll('.description');	
 text.call(wrap);
@@ -124,7 +124,7 @@ d3.json("data/summary_population.json", function(data) {
    var subtitle = chart.append('text')
     	.attr("class", "smallDescription")
         .attr("x",-marginB2)
-        .attr("y",-10)
+        .attr("y",10)
         .text("Pourcentage d'habitants par catégorie")
         .style('text-anchor','start');
 

@@ -79,7 +79,7 @@ var title1 = d3.select("#B-map")
 		.attr("transform", "translate(" + 15 + "," + marginB1.top  + ")")
 		.append("text")
 		.attr("class","description")
-		.html("<tspan>Une superficie dominée par les villages (2014)</tspan>");
+		.html("<tspan>Les villages représentent la majeure partie du territoire en terme de superficie</tspan>");
 
 var title2 = d3.select("#D-map")
 	.attr("width", widthB1+ marginB1.right + marginB1.left)
@@ -88,7 +88,7 @@ var title2 = d3.select("#D-map")
 		.attr("transform", "translate(" + 15 + "," + marginB1.top  + ")")
 		.append("text")
 		.attr("class","description")
-		.html("<tspan>Des écarts flagrants dans l'évolution de la population selon les communes</tspan>");
+		.html("<tspan>Une augmentation de population très marquée autour des métropoles et grandes villes ou la périurbanisation</tspan>");
 
 var playbuttonD = d3.select("#playButtonD");
 var chooseButtonD1 = d3.select("#chooseButtonD1");
@@ -127,13 +127,13 @@ playbuttonD.append("input")
 // PREPARE ANOTATION MAP
 const annotationsMap = [
 	{ note: { 
-	  	label: "De très fort taux d'évolution autour de Toulouse",
+	  	label: "De très fort taux d'évolution de population autour de Toulouse",
 	  	wrap: 160
 	  }, 
 	  x: 240, y:290, dy: -150, dx: -170, subject: { radius: 50, radiusPadding: 10 }
 	},
 	{ note: { 
-	  	label: "De très fort taux d'évolution autour de Montpellier",
+	  	label: "De très fort taux d'évolution de population autour de Montpellier",
 	  	wrap: 160
 	  }, 
 	  x: 520, y:285, dy: -150, dx: 100, subject: { radius: 200, radiusPadding: 0 }
@@ -231,8 +231,8 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 			if (selectedAttribute == "Moyenne d'age"){
 				attr = "age";
 				//cat = ageCategories;
-				title1 = "Les moyennes d'age plus jeune";
-				title2 = "plutôt avec les taux d'évolution élevés";
+				title1 = "Les plus jeunes sont concentrés dans";
+				title2 = "les communes les plus dynamiques";
 				subtitle1 = "Nombre de commune pour chaque catégorie de %";
 				subtitle2 = "d'évolution et de moyenne d'age";
 				
@@ -241,8 +241,8 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 			else if (selectedAttribute == "Revenu médian par unité de conso"){
 				attr = "revenu";
 				//cat = revenuCategories;
-				title1 = "Les plus hauts revenus dans les communes";
-				title2 = "au plus fort taux d'évolution";
+				title1 = "Les plus hauts revenus localisés dans les";
+				title2 = "communes au plus fort taux d'évolution";
 				subtitle1 = "Nombre de commune pour chaque catégorie de %";
 				subtitle2 = "d'évolution et de revenu médian";
 			}

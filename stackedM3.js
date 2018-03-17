@@ -22,7 +22,7 @@ var title = d3.select("#A-time-population")
 		.attr("transform", "translate(" + 15 + "," + 15 + ")")
 		.append("text")
 		.attr("class","description")
-		.html("<tspan>Une augmentation de population différente selon la catégorie de commune</tspan>");
+		.html("<tspan>Une forte augmentation de population de 1968 à 2014</tspan>");
 		
 var x = d3.scaleLinear()
     .range([0, widthA])

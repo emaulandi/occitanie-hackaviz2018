@@ -1,0 +1,110 @@
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	margin-top: 40px;/* make room for the nav bar */
+}
+
+.container-large {
+	height: 700px;
+}
+
+
+/* STACKED AREA CSS */
+
+.legend, .label {
+	font-size: 13px;
+	fill: #333333 ;
+}
+
+.legend rect{
+	stroke: lightgrey;
+	stroke-width: 0.7px;
+}
+
+.description {
+	font-size: 18px;
+}
+
+.ax text {
+	opacity: 0.7;
+}
+
+.ax line {
+	stroke: gray;
+	opacity: 0.5;
+}
+
+.ax path {
+	stroke: #333333;
+	opacity: 0.5;
+}
+
+.layer path {
+	stroke: white;
+	stroke-width: 1px;
+	opacity: 0.8;
+}
+
+
+/* SLOPINE CSS */
+.slopeline {
+	stroke-width: 6;
+}
+
+.description {
+	font-size: 20px;
+}
+
+.descriptionRec {
+	font-size: 20px;
+}
+
+.smallDescription {
+	font-size: 13px;
+	fill: grey ;
+}
+
+.labelsleft, .labelsright {
+	font-size: 15px;
+	fill: #333333 ;
+}
+
+.labelyear {
+	font-size: 18px;
+	fill: gray;
+}
+
+/* MAP CSS */
+/* 
+A MODIFIER ET VOIR CE QI PEUT VIRER GENRE WIDTH ET HEIGHT
+<div id="container">
+	<div id="carte1"></div>
+	<div id="carte2"></div>
+*/
+
+.legendMap2 text {
+	font-size: 13px;
+	fill: grey ;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#container1{
+	position: absolute;
+}
+#container2{
+	position: absolute;
+}
+#B-map{
+  /**width:850px;
+  height: 700px;
+  margin-top:-30px;
+  */
+	position: absolute;
+}
+#D-map{
+  /**width:850px;
+  height: 700px;
+  margin-top:-30px;
+  */
+	position: absolute;
+}
+

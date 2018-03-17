@@ -1,0 +1,30 @@
+[
+  {
+    "sum1968": 1542272,
+    "sum1982": 1500344,
+    "sum1999": 1522666,
+    "sum2014": 1645708,
+    "categorie": "village"
+  },
+{
+    "sum1968": 1073831,
+    "sum1982": 1430115,
+    "sum1999": 1830841,
+    "sum2014": 2367040,
+    "categorie": "bourg et petite ville"
+  },
+  {
+    "sum1968": 885278,
+    "sum1982": 961574,
+    "sum1999": 866796,
+    "sum2014": 976390,
+    "categorie": "moyenne et grande ville"
+  },
+  {
+    "sum1968": 370796,
+    "sum1982": 347995,
+    "sum1999": 615742,
+    "sum2014": 741615,
+    "categorie": "metropole"
+  }
+]

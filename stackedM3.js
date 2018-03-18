@@ -49,9 +49,9 @@ stack.keys(["village","bourg et petite ville","moyenne et grande ville","metropo
 const annotations = [{
 	  note: { 
 	  	label: "L'évolution de la population la plus forte concerne les bourgs et petites villes",
-	  	wrap: 160
+	  	wrap: 200
 	  }, 
-	  x: 500, y:180, dy: 80, dx: 150, subject: { radius: 200, radiusPadding: 0 }
+	  x: 500, y:180, dy: 80, dx: 180, subject: { radius: 200, radiusPadding: 0 }
 	}];
 d3.annotation().annotations(annotations);
 

@@ -7,6 +7,15 @@ body {
 	height: 700px;
 }
 
+.annotation-group {
+	font-size: 15px;
+  	font-weight: bold;
+  	color: black ;
+}
+
+.annotation-groupSlope text {
+	font-size: 12px;
+}
 
 /* STACKED AREA CSS */
 

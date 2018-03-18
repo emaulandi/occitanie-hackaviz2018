@@ -1,7 +1,7 @@
 // -- USEFULL CATEGORIES -- //
 var revenuCategories = ["0-5k","5-10k","10-15k","15-20k","20-25k","25-30k","30-35k","35-40k"];
 var percLossCategories = ["-100 à -75%","-75 à -50 %","-50 à -25 %","-25 à 0 %","0-25 %","25-50 %","50-100 %","100 % et au delà"];
-var ageCategories = ["0-20","20-30","30-40","40-50","50-60","60-70","70-80","80 et au delà"];
+var ageCategories = ["0-20","20-30","30-40","40-50","50-60","60-70","70-80","80 et +"];
 var ageCategoriesSeuil = [20,30,40,50,60,70,80];
 var revenuCategoriesSeuil = [5000,10000,15000,20000,25000,30000,35000];
 var percLossCategoriesSeuil = [-0.75,-0.50,-0.25,0,0.25,0.50,1];
@@ -17,7 +17,8 @@ var catCities = [
 //var colorPopulation = d3.scaleQuantize().range(["#2c7bb6", "#00a6ca","#00ccbc","#90eb9d","#ffff8c","#f9d057","#f29e2e","#e76818","#d7191c"]);
 var colorPopulation = d3.scaleLinear().range(["#2c7bb6","#d7191c"]);
 //var colorAge = d3.scaleLinear().range(["#4da6ff", "white"]);
-var colorAge = d3.scaleLinear().range(['#bd0026','#f03b20','#fd8d3c','#feb24c','#fed976','#ffffb2']).domain([20,30,40,50,60,70]); 
+//var colorAge = d3.scaleLinear().range(['#bd0026','#f03b20','#fd8d3c','#feb24c','#fed976','#ffffb2']).domain([20,30,40,50,60,70]); 
+var colorAge = d3.scaleThreshold().range(['#bd0026','#f03b20','#fd8d3c','#feb24c','#fed976','#ffffb2']).domain([20,30,40,50,60,70]); 
 //var colorRevenu = d3.scaleLinear().range(['#f1eef6','#bdc9e1','#74a9cf','#1c5d7d','#091f2a']).domain([0,10000,20000,30000,40000]); 
 
 var colorRevenu = d3.scaleThreshold().range(['#ffffcc','#a1dab4','#41b6c4','#2c7fb8','#253494']).domain([0,10000,20000,30000,40000]); 
@@ -29,12 +30,12 @@ var colorHeatAge = d3.scaleThreshold().range(['#f2f2f2','#ffeab3','#feb24c','#fc
     	
 var widthB1 = 650,
     heightB1 = 480;
-var marginB1 = {top: 30, right: 100, bottom: 60, left: 10};
+var marginB1 = {top: 50, right: 100, bottom: 60, left: 10};
 
 
 var heightE = 300;
 var widthE = 300;
-var marginE = {top: 130, right: 200, bottom: 200, left: 50};
+var marginE = {top: 130, right: 200, bottom: 200, left: 70};
 
 //Occitanie, France Latitude : 43.892723 | Longitude : 3.282762
 var proj = d3.geoMercator()
@@ -60,7 +61,7 @@ var svg2 = d3.select("#D-map")
 var svg3 = d3.select("#E-chart")
     .attr("width", widthE+ marginE.right + marginE.left)
     .attr("height", heightE + marginE.top + marginE.bottom)
-    .attr("transform", "translate(" + (widthB1 + marginB1.right + marginB1.left + 100) + "," + 0 + ")")
+    .attr("transform", "translate(" + (widthB1 + marginB1.right + marginB1.left + 50) + "," + 0 + ")")
     .append("g")
 		.attr("transform", "translate(" + marginE.left + "," + marginE.top + ")");
 /*
@@ -72,6 +73,7 @@ svg3.append('rect')
 		.style('fill', 'black');
 */
 
+// TITLE
 var title1 = d3.select("#B-map")
 	.attr("width", widthB1+ marginB1.right + marginB1.left)
     .attr("height", heightB1 + marginB1.top + marginB1.bottom)
@@ -80,15 +82,21 @@ var title1 = d3.select("#B-map")
 		.append("text")
 		.attr("class","description")
 		.html("<tspan>Les villages représentent la majeure partie du territoire en terme de superficie</tspan>");
-
-var title2 = d3.select("#D-map")
-	.attr("width", widthB1+ marginB1.right + marginB1.left)
-    .attr("height", heightB1 + marginB1.top + marginB1.bottom)
-		.append("g")
-		.attr("transform", "translate(" + 15 + "," + marginB1.top  + ")")
-		.append("text")
+	
+svg2.append("text")
+		.attr("x",5)
+        .attr("y",-20)
 		.attr("class","description")
-		.html("<tspan>Une augmentation de population très marquée autour des métropoles et grandes villes ou la périurbanisation</tspan>");
+			//.text(title);
+		.html("Une augmentation de population très marquée autour des métropoles");
+
+svg2.append("text")
+		.attr("x",5)
+        .attr("y",5)
+		.attr("class","description")
+			//.text(title);
+		.html("et grandes villes, ou le phénomène de périurbanisation");
+
 
 var playbuttonD = d3.select("#playButtonD");
 var chooseButtonD1 = d3.select("#chooseButtonD1");
@@ -130,13 +138,31 @@ const annotationsMap = [
 	  	label: "De très fort taux d'évolution de population autour de Toulouse",
 	  	wrap: 160
 	  }, 
-	  x: 240, y:290, dy: -150, dx: -170, subject: { radius: 50, radiusPadding: 10 }
+	  x: 240, y:290, dy: -180, dx: -170, subject: { radius: 200, radiusPadding: 10 }
 	},
 	{ note: { 
-	  	label: "De très fort taux d'évolution de population autour de Montpellier",
+	  	label: "et Cahors",
+	  	wrap: 160
+	  }, 
+	  x: 240, y:150, dy: -30, dx: -90, subject: { radius: 200, radiusPadding: 10 }
+	},
+	{ note: { 
+	  	label: "De très fort taux d'évolution autour de Montpellier",
 	  	wrap: 160
 	  }, 
 	  x: 520, y:285, dy: -150, dx: 100, subject: { radius: 200, radiusPadding: 0 }
+	},
+	{ note: { 
+	  	label: "et Nimes",
+	  	wrap: 160
+	  }, 
+	  x: 580, y:245, dy: -80, dx: 80, subject: { radius: 200, radiusPadding: 0 }
+	},
+	{ note: { 
+	  	label: "ainsi que Perpignan",
+	  	wrap: 100
+	  }, 
+	  x: 405, y:430, dy: -30, dx: 60, subject: { radius: 200, radiusPadding: 0 }
 	}
 	];
 d3.annotation().annotations(annotationsMap);
@@ -233,8 +259,9 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 				//cat = ageCategories;
 				title1 = "Les plus jeunes sont concentrés dans";
 				title2 = "les communes les plus dynamiques";
-				subtitle1 = "Nombre de commune pour chaque catégorie de %";
+				subtitle1 = "Nombre de commune pour chaque catégorie de taux ";
 				subtitle2 = "d'évolution et de moyenne d'age";
+				titleLegend = "Moyenne d'âge";
 				
 				
 			}
@@ -243,21 +270,21 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 				//cat = revenuCategories;
 				title1 = "Les plus hauts revenus localisés dans les";
 				title2 = "communes au plus fort taux d'évolution";
-				subtitle1 = "Nombre de commune pour chaque catégorie de %";
+				subtitle1 = "Nombre de commune pour chaque catégorie de taux ";
 				subtitle2 = "d'évolution et de revenu médian";
+				titleLegend = "Revenu médian par unité de consomation";
 			}
 			//CHANGE FILL MAP
-			updateFillMap(svg2,data.features,attr);
+			updateFillMap(svg2,data.features,attr,titleLegend);
 			
 			// DRAW HEAT MAP
-			console.log("Selection",cat);
 			drawHeatmap(title1,title2,subtitle1,subtitle2,attr);		
 			
 			// AJOUT BOUTON MAP
 			chooseButtonD1.append("input")
 			.attr("type", "button")
 			.attr("class", "choose")
-			.attr("value", "Carte % evolution")
+			.attr("value", "Carte teux d'évolution")
 			.on("click", function(d) { 
 				//Clean Legend
 				svg2.selectAll(".legendMap2").remove();
@@ -274,14 +301,17 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 				svg2.selectAll(".legendMap2").remove();
 				//Update attr and fill
 				var attr = "";
+				var title;
 				if (selectedAttribute == "Revenu médian par unité de conso"){
-					var attr = "revenu";
+					attr = "revenu";
+					titleLegend = "Revenu médian par unité de consomation";
 					
 				}
 				else if (selectedAttribute == "Moyenne d'age"){
-					var attr = "age";
+					attr = "age";
+					titleLegend = "Moyenne d'âge";
 				}
-				updateFillMap(svg2,data.features,attr);
+				updateFillMap(svg2,data.features,attr,titleLegend);
 				//add legend
 				// ** TBD **
 			});
@@ -296,7 +326,7 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 
 // --- UTILITIES FUNCTIONS ----//
 
-function updateFillMap(svg,data,fillattribute) {
+function updateFillMap(svg,data,fillattribute,title) {
 	
 	//Clean Legend
 	svg.selectAll(".legendMap2").remove();
@@ -324,7 +354,7 @@ function updateFillMap(svg,data,fillattribute) {
 		var colorLegend = d3.legendColor()
 		.labelFormat(d3.format("d"))
 		.labels(d3.legendHelpers.thresholdLabels)
-		.title("Nombre de commune par revenu médian et pourcentage d'évolution de la population")
+		.title(title)
 		//.orient('horizontal')
   		.titleWidth(200)
         .shapePadding(3)
@@ -344,7 +374,7 @@ function updateFillMap(svg,data,fillattribute) {
 		}    
 
 		svg2.append("g")
-		    .attr("transform", "translate(" + 550 +"," + 380 + ")")
+		    .attr("transform", "translate(" + 520 +"," + 380 + ")")
 		    .attr("class", "legendMap2")
 		    .call(colorLegend);	
 	}
@@ -375,7 +405,7 @@ function drawMap(svg,width,margin,subtitle,data,fillattribute) {
     drawSubtitleMap(svg,margin,subtitle);
     
 	if (fillattribute == "categorie"){ 
-		drawLegendCategorie(svg,width);
+		drawLegendCategorie(svg,width,"Catégorie de commune selon le nombre d'habitants");
 	}
 	else if (fillattribute == "percLoss") {
 		drawLegendPercLoss(svg);
@@ -386,12 +416,12 @@ function drawSubtitleMap(svg,margin,subtitle) {
    svg.append('text')
     	.attr("class", "smallDescription")
         .attr("x",7)
-        .attr("y",3*margin/4)
+        .attr("y",2*margin/4)
         .text(subtitle)
         .style('text-anchor','start');
 }
 
-function drawLegendCategorie(svg,width) {
+function drawLegendCategorie(svg,width,title) {
 
 	// LEGEND //
 	var shapePadding = 5;
@@ -399,7 +429,7 @@ function drawLegendCategorie(svg,width) {
 	var titleWidth = 150;
 	var colorLegend = d3.legendColor()
 		.labelFormat(d3.format(".2f"))
-		.title("Catégorie de commune selon le nombre d'habitants")
+		.title(title)
   		.titleWidth(titleWidth)
         .scale(colorCat)
         .shapePadding(shapePadding)
@@ -408,7 +438,7 @@ function drawLegendCategorie(svg,width) {
         .labelOffset(10);
 
     svg.append("g")
-        .attr("transform", "translate(" + (width-titleWidth+50) +"," + 350 + ")")
+        .attr("transform", "translate(" + (width-titleWidth+20) +"," + 350 + ")")
         .attr("class", "legend")
         .call(colorLegend);	
 }
@@ -505,13 +535,6 @@ function cleanHeatmap() {
 }
 
 function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
-	/*
-	var title1 = "Les plus hauts revenus dans les communes";
-	var title2 = "au plus fort taux d'évolution";
-	var subtitle1 = "Nombre de commune pour chaque catégorie de %";
-	var subtitle2 = "d'évolution et de revenu médian";
-	*/
-
 //DEFINE Y to use
 	var y_use ;
 	var value_use;
@@ -530,14 +553,14 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
 	
 // TITLE SUBTITLE
 	svg3.append("text")
-		.attr("x",- 3)
+		.attr("x",-50)
         .attr("y",-90)
 		.attr("class","descriptionRec")
 			//.text(title);
 		.html(title1);
 		
 	svg3.append("text")
-		.attr("x",- 3)
+		.attr("x",- 50)
         .attr("y",-65)
 		.attr("class","descriptionRec")
 			//.text(title);
@@ -545,15 +568,15 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
 	
 	svg3.append('text')
     	.attr("class", "smallDescription")
-        .attr("x",- 3)
-        .attr("y",- 35)
+        .attr("x",- 50)
+        .attr("y",- 45)
         .text(subtitle1)
         .style('text-anchor','start');
         
     svg3.append('text')
     	.attr("class", "smallDescription")
-        .attr("x",- 3)
-        .attr("y",-20)
+        .attr("x",- 50)
+        .attr("y",-30)
         .text(subtitle2)
         .style('text-anchor','start');
 
@@ -612,7 +635,7 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
 	var colorLegend = d3.legendColor()
 		.labelFormat(d3.format("d"))
 		.labels(d3.legendHelpers.thresholdLabels)
-		.title("Nombre de commune par revenu médian et pourcentage d'évolution de la population")
+		.title(subtitle1 + subtitle2)
 		//.orient('horizontal')
   		.titleWidth(300)
         //
@@ -622,17 +645,58 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
         .labelOffset(10);
     
     if (cat == "age"){
-		colorLegend.scale(colorHeatAge) 
+		colorLegend.scale(colorHeatAge);
 	}
 	else if (cat == "revenu") {
-		colorLegend.scale(colorHeatRevenu)
+		colorLegend.scale(colorHeatRevenu);
 	}    
 
     svg3.append("g")
         .attr("transform", "translate(" + 0 +"," + (heightE+90) + ")")
         .attr("class", "legend")
-        .call(colorLegend);	
-        
+        .call(colorLegend);
+
+// ANNOTATION
+
+	var label, x, y, dy, dx, width, height;
+	if (cat == "age"){
+		label = "Les plus agés localisés dans les communes en baisse de population";
+		x = 120;
+		y = 33;
+		dx = 220;
+		dy = 0;
+		width= -120;
+		height= 45;
+	}
+	else if (cat == "revenu") {
+		label = "Les plus hauts revenus dans les communes où la population a plus que doublée";
+		x = 302;
+		y = 0;
+		dx = 30;
+		dy = 0;
+		width= -40;
+		height= 75;
+	} 	
+	
+	
+	annotationsHeatmap = [{
+	  note: {
+		label: label,
+	  },
+	  x:x, y:y, dy: dy,  dx: dx,
+	  subject: {
+		width: width,
+		height: height
+	  }
+	}]
+	
+	const makeAnnotationsHeatmap = d3.annotation()
+	  .type(d3.annotationCalloutRect)
+	  .annotations(annotationsHeatmap);
+	  
+	svg3.append("g")
+		.attr("class", "annotation-group")
+		.call(makeAnnotationsHeatmap);
 }
 
 function updateTab(tab,t) {

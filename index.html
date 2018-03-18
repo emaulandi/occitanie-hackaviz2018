@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bootstrap Example</title>
+  <title>Occitanie : Enquête sur les dynamique de populations</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -21,13 +21,13 @@
   body {
       position: relative; 
   }
-  #section1 {height:350px;color: white; background-color: #00bcd4;}
+  #section1 {height:450px;color: white; background-color: #008799;}
   #section2 {height:550px;color: grey; background-color: white;}
   #section3 {height:650px;color: black; background-color: #f2f2f2;}
-  #section4 {height:400px;color: white; background-color: #00bcd4;}
+  #section4 {height:400px;color: white; background-color: #008799;}
   #section5 {height:800px;color: black; background-color: white;}
-  #section6 {height:200px;color: white; background-color: #00bcd4;}
-  #section7 {height:700px;color: grey; background-color: #f2f2f2;}
+  #section6 {height:400px;color: white; background-color: #008799;}
+  #section7 {height:400px;color: grey; background-color: #f2f2f2;}
   </style>
   
   <script>
@@ -48,13 +48,13 @@
       <a class="nav-link" href="#section2">Evolution de la population</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#section3">Population : surface et proportion</a>
+      <a class="nav-link" href="#section3">Superficie et proportion</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#section4">Et derrière ?</a>
+      <a class="nav-link" href="#section4">Et au delà de la catégorie de commune ?</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#section5">Phénomène de péri-urbanisation</a>
+      <a class="nav-link" href="#section5">Le phénomène de périurbanisation</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#section6">Conclusion</a>
@@ -69,7 +69,10 @@
   <h1><b>Occitanie</b></h1>
   <h1>Enquêtons sur les dynamiques de population</h1>
   <br>
-  <p>test</p>
+  <h4>Vous êtes vous déjà demandé comment la population d'Occitanie a évolué au cours du temps ?</h4>
+  <h5>A partir de données sur la population <b>entre 1968 et 2014</b>, regardons <b>comment la population a évolué</b> sur le territoire.</h5>
+  <h5>L'Occitanie compte plus de <b>4 700 communes</b>, mais vous verrez que la dynmaqiue de population n'est pas uniforme.</h5>
+  <h5>Nous enquêterons ensuite pour savoir si l'augmentation de population est corrélée à d'autres caractéristiques des communes en <b>2014</b>, comme la moyenne d'age où le revenu médian par unité de consommation. + Explication</h5>
   <br>
   <h4> <b> C'est parti ! </b></h4>
 </div>
@@ -93,12 +96,17 @@
 <div id="section4" class="container-fluid" style="padding-top:50px;padding-bottom:50px;padding-left:20px;">
   <h5>La dynamique de population entre 1968 et 2014 est fortement marquée par l'accroissement de population dans les bourgs et petites villes.</h5>
   <h5>Mais cette augmentation de population est-elle la même pour toutes les communes de cette catégorie ?</h5>
-  <h3><b>Est-ce que l'augmentation de la population serait plus localisé géographiquement ?</b></h3>
+  <h4><b>Est-ce que l'augmentation de la population serait plus localisé géographiquement ?</b></h4>
   <br>
-  <h5>Regardons pour chaque commune son taux d'évolution entre 1968 et 2014</h5>
-  <p>Un taux négatif signifie que la population a baissé au cours du temps. Un taux positif, qu'elle a augmenté</p>
-  <p>Un taux de 100% signifie que la population a doublé entre 1968 et 2014. Au dessus, c'est qu'elle a encore plus augmenté !</p>
-  <h5>A votre avis, où sont localisés les communes avec le plus fort taux d'évolution ?</h5>
+  <h5>Regardons pour chaque commune son <b>taux d'évolution entre 1968 et 2014</b></h5>
+  <ul>
+   <li> Un taux négatif signifie que la population a baissé au cours du temps. 
+   </li>
+   <li> Un taux positif signifie qu'elle a augmenté. A 100% et au delà, c'est que la population a plus que doublé entre 1968 et 2014 !
+ 	 </li>
+  </ul>
+  <br>
+  <h4><b>A votre avis, où sont localisés les communes avec le plus fort taux d'évolution ?</b></h4>
 </div>
 
 <div id="section5" class="container-fluid" style="padding-top:20px;padding-bottom:20px;">
@@ -124,15 +132,24 @@
 	</div>
 </div>
 
-<div id="section6" class="container-fluid" style="padding-top:20px;padding-bottom:20px;">
+<div id="section6" class="container-fluid" style="padding-top:40px;padding-bottom:20px;">
 <h1>Conclusion</h1>
   <p>Test</p>
 </div>
 
-<div id="section7" class="container-fluid" style="padding-top:20px;padding-bottom:20px;">
-<h1>Crédits</h1>
-  <p>Outils : pandas, jupyter netbook</p>
-  <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
+<div id="section7" class="container-fluid" style="padding-top:40px;padding-bottom:20px;">
+<h3>Crédits</h3>
+  <ul>
+   <li> Jeu de données fournit par <a href="http://toulouse-dataviz.fr/">l'association toulouse Dataviz</a> dans le cadre du <a href="http://toulouse-dataviz.fr/?page_id=11">Hackaviz 2018</a> 
+   </li>
+   <li> Plugin D3.js pour les annotations : <a href="http://d3-annotation.susielu.com/">d3-annotation par Susie Lu</a>  </li>
+   <li> Plugin D3.js pour les légendes: <a href="http://d3-legend.susielu.com/">d3-legend par Susie Lu</a>  </li>
+   <li> Plugin D3.js pour enrouler le texte : <a href="https://github.com/vijithassar/d3-textwrap">d3-textwrap par vijithassar</a>  </li>
+   <li> Choix des couleurs pour les cartes avec <a href="http://colorbrewer2.org">Color Brewer</a>  </li>
+  </ul>
+  <br>
+  <p>Réalisé par Edith Maulandi de <a href="https://emaulandi.github.io/">Edith Visualize</a> , contact par <a href="mailto:e.maulandi@gmail.com">mail</a>  et <a href="https://twitter.com/edithmaulandi">twitter</a></p>
+  
 </div>
 
 

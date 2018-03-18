@@ -1,7 +1,8 @@
 // DEFINE DRAWING AREA SIZING
 var heightB2 = 380;
-var widthB2 = 150;
-var marginB2 = 100;
+var widthB2 = 120;
+var marginB2top = 100;
+var marginB2side = 160;
 
 
 /*
@@ -15,16 +16,16 @@ var widthB1map = 800;
 // CREATE DRAWING PART MOVED 30,30 FROM SVG
 
 var chart = d3.select("#C-chart")
-	.attr("width", widthB2 + 2*marginB2)
-	.attr("height", heightB2 + 2*marginB2)
+	.attr("width", widthB2 + 2*marginB2side)
+	.attr("height", heightB2 + 2*marginB2top)
 	.attr("transform", "translate(" + widthB1map + "," + 20 + ")")
 		.append("g")
-		.attr("transform", "translate(" + (marginB2) + "," + marginB2 + ")");
+		.attr("transform", "translate(" + (marginB2side) + "," + marginB2top + ")");
 
 		
 // create a text wrapping function
 var wrap = d3.textwrap()
-	.bounds({height: 150, width: widthB2+ 2*marginB2});
+	.bounds({height: 150, width: widthB2+ 2*marginB2side});
 	//.method('tspans');
 
 var titleB2 = d3.select("#C-chart")
@@ -36,6 +37,61 @@ var titleB2 = d3.select("#C-chart")
 		
 var text = d3.selectAll('.description');	
 text.call(wrap);
+
+// PREPARE ANOTATION MAP
+const annotationsSlope1 = [
+	{ note: { 
+	  	label: "En 1968, 40 % de la population habitait dans un village",
+	  	wrap: 110
+	  }, 
+	  x: 100, y:180, dy: 20, dx: -45, subject: { radius: 200, radiusPadding: 10 }
+	}
+];
+const annotationsSlope2 = [
+	{ note: { 
+	  	label: "plus que 29% en 2014, alors que les villages devenus bourgs concernent uniquement 1/10 d'entre eux",
+	  	wrap: 130
+	  }, 
+	  x: 325, y:265, dy: 15, dx: 55, subject: { radius: 200, radiusPadding: 10 }
+	}
+];
+const annotationsCircle = [
+	{
+	  note: { label: "",lineType:"none",},
+	  x: 305, y:160, dy: 0, dx: 0,
+	  subject: { radius: 35, radiusPadding: 10 },
+	  connector: { type: "none" }
+	}
+];
+
+d3.annotation().annotations(annotationsSlope1);
+d3.annotation().annotations(annotationsSlope2);
+d3.annotation().annotations(annotationsCircle);
+
+const makeAnnotationsSlope1 = d3.annotation()
+	  .type(d3.annotationLabel)
+	  .annotations(annotationsSlope1);
+
+const makeAnnotationsSlope2 = d3.annotation()
+	  .type(d3.annotationLabel)
+	  .annotations(annotationsSlope2);
+	  
+const makeAnnotationsCircle = d3.annotation()
+	  .type(d3.annotationCalloutCircle)
+	  .annotations(annotationsCircle);
+
+d3.select("#C-chart").append("g")
+	  .attr("class", "annotation-groupSlope")
+	  .call(makeAnnotationsSlope1);
+	  
+d3.select("#C-chart").append("g")
+	  .attr("class", "annotation-groupSlope")
+	  .style("text-anchor","end")
+	  .call(makeAnnotationsSlope2);
+	  
+d3.select("#C-chart").append("g")
+	  .attr("class", "annotation-groupSlope")
+	  .call(makeAnnotationsCircle);
 
 d3.json("data/summary_population.json", function(data) {
 	console.log(data);
@@ -116,15 +172,15 @@ d3.json("data/summary_population.json", function(data) {
 
     var rightTitle = chart.append('text')
     	.attr("class", "labelyear")
-        .attr("x",widthB2 + marginB2/2)
+        .attr("x",widthB2 + marginB2side/2-30)
         .attr("y",heightB2+20)
         .text("2014")
         .style('text-anchor','end');
    
    var subtitle = chart.append('text')
     	.attr("class", "smallDescription")
-        .attr("x",-marginB2)
-        .attr("y",10)
+        .attr("x",-marginB2side)
+        .attr("y",0)
         .text("Pourcentage d'habitants par catégorie")
         .style('text-anchor','start');
 

@@ -33,7 +33,7 @@ var titleB2 = d3.select("#C-chart")
 		.attr("class","description")
 		//.attr("transform", "translate(" + 0 + "," + 0 + ")")
 		.append("text")
-		.text("Les villages représentaient la plus grande proportion d'habitants en 1968, mais les bourgs et petites villes sont maintenant prépondérantes en proportion");
+		.text("Les villages représentaient la plus grande proportion d'habitants en 1968, mais les bourgs et petites villes sont prépondérantes en proportion en 2014");
 		
 var text = d3.selectAll('.description');	
 text.call(wrap);
@@ -55,6 +55,7 @@ const annotationsSlope2 = [
 	  x: 325, y:265, dy: 15, dx: 55, subject: { radius: 200, radiusPadding: 10 }
 	}
 ];
+/*
 const annotationsCircle = [
 	{
 	  note: { label: "",lineType:"none",},
@@ -63,10 +64,11 @@ const annotationsCircle = [
 	  connector: { type: "none" }
 	}
 ];
+*/
 
 d3.annotation().annotations(annotationsSlope1);
 d3.annotation().annotations(annotationsSlope2);
-d3.annotation().annotations(annotationsCircle);
+//d3.annotation().annotations(annotationsCircle);
 
 const makeAnnotationsSlope1 = d3.annotation()
 	  .type(d3.annotationLabel)
@@ -75,11 +77,11 @@ const makeAnnotationsSlope1 = d3.annotation()
 const makeAnnotationsSlope2 = d3.annotation()
 	  .type(d3.annotationLabel)
 	  .annotations(annotationsSlope2);
-	  
+/*	  
 const makeAnnotationsCircle = d3.annotation()
 	  .type(d3.annotationCalloutCircle)
 	  .annotations(annotationsCircle);
-
+*/
 d3.select("#C-chart").append("g")
 	  .attr("class", "annotation-groupSlope")
 	  .call(makeAnnotationsSlope1);
@@ -88,11 +90,11 @@ d3.select("#C-chart").append("g")
 	  .attr("class", "annotation-groupSlope")
 	  .style("text-anchor","end")
 	  .call(makeAnnotationsSlope2);
-	  
+/*	  
 d3.select("#C-chart").append("g")
 	  .attr("class", "annotation-groupSlope")
 	  .call(makeAnnotationsCircle);
-
+*/
 d3.json("data/summary_population.json", function(data) {
 	console.log(data);
 	

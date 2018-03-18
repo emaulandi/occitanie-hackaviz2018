@@ -1,7 +1,7 @@
 // -- USEFULL CATEGORIES -- //
 var revenuCategories = ["0-5k","5-10k","10-15k","15-20k","20-25k","25-30k","30-35k","35-40k"];
 var percLossCategories = ["-100 à -75%","-75 à -50 %","-50 à -25 %","-25 à 0 %","0-25 %","25-50 %","50-100 %","100 % et au delà"];
-var ageCategories = ["0-20","20-30","30-40","40-50","50-60","60-70","70-80","80 et +"];
+var ageCategories = ["0-20 ans","20-30 ans","30-40 ans","40-50 ans","50-60 ans","60-70 ans","70-80 ans","80 ans et +"];
 var ageCategoriesSeuil = [20,30,40,50,60,70,80];
 var revenuCategoriesSeuil = [5000,10000,15000,20000,25000,30000,35000];
 var percLossCategoriesSeuil = [-0.75,-0.50,-0.25,0,0.25,0.50,1];
@@ -35,7 +35,7 @@ var marginB1 = {top: 50, right: 100, bottom: 60, left: 10};
 
 var heightE = 300;
 var widthE = 300;
-var marginE = {top: 130, right: 200, bottom: 200, left: 70};
+var marginE = {top: 130, right: 200, bottom: 250, left: 70};
 
 //Occitanie, France Latitude : 43.892723 | Longitude : 3.282762
 var proj = d3.geoMercator()
@@ -105,7 +105,7 @@ var dropdownbuttonD = d3.select("#dropdownButtonD");
 var attributes = [
 	{name:"Aucune"},
 	{name:"Moyenne d'age"},
-	{name:"Revenu médian par unité de conso"}
+	{name:"Revenu médian par unité de consommation"}
 ];
 // GESTION BOUTON 
 playbuttonD.attr("transform", "translate(" + 0 + "," + 15 + ")");
@@ -265,13 +265,13 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 				
 				
 			}
-			else if (selectedAttribute == "Revenu médian par unité de conso"){
+			else if (selectedAttribute == "Revenu médian par unité de consommation"){
 				attr = "revenu";
 				//cat = revenuCategories;
 				title1 = "Les plus hauts revenus localisés dans les";
 				title2 = "communes au plus fort taux d'évolution";
 				subtitle1 = "Nombre de commune pour chaque catégorie de taux ";
-				subtitle2 = "d'évolution et de revenu médian";
+				subtitle2 = "d'évolution et de revenu médian par unité de consommation";
 				titleLegend = "Revenu médian par unité de consomation";
 			}
 			//CHANGE FILL MAP
@@ -284,7 +284,7 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 			chooseButtonD1.append("input")
 			.attr("type", "button")
 			.attr("class", "choose")
-			.attr("value", "Carte teux d'évolution")
+			.attr("value", "Carte Taux d'évolution")
 			.on("click", function(d) { 
 				//Clean Legend
 				svg2.selectAll(".legendMap2").remove();
@@ -302,7 +302,7 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 				//Update attr and fill
 				var attr = "";
 				var title;
-				if (selectedAttribute == "Revenu médian par unité de conso"){
+				if (selectedAttribute == "Revenu médian par unité de consommation"){
 					attr = "revenu";
 					titleLegend = "Revenu médian par unité de consomation";
 					
@@ -660,36 +660,42 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
 
 	var label, x, y, dy, dx, width, height;
 	if (cat == "age"){
-		label = "Les plus agés localisés dans les communes en baisse de population";
-		x = 120;
-		y = 33;
-		dx = 220;
-		dy = 0;
-		width= -120;
-		height= 45;
+	
+		annotationsHeatmap = [{
+		  note: {
+			label: "Les plus agés localisés dans les communes en baisse de population",
+		  },
+		  x:120, y:33, dy:0,  dx: 220,
+		  subject: {
+			width: -120,
+			height: 45
+		  }
+		},
+		{
+		  note: {
+			label: "Les plus jeunes localisés dans les communes à forte augmentation de population",
+		  },
+		  x:305, y:220, dy:0,  dx: 30,
+		  subject: {
+			width: -160,
+			height: 45
+		  }
+		}
+		]
 	}
-	else if (cat == "revenu") {
-		label = "Les plus hauts revenus dans les communes où la population a plus que doublée";
-		x = 302;
-		y = 0;
-		dx = 30;
-		dy = 0;
-		width= -40;
-		height= 75;
+	else if (cat == "revenu") {	
+		annotationsHeatmap = [{
+		  note: {
+			label: "Les plus hauts revenus dans les communes où la population a plus que doublée",
+		  },
+		  x:302, y:0, dy:0,  dx: 30,
+		  subject: {
+			width: -40,
+			height: 75
+		  }
+		}]
 	} 	
-	
-	
-	annotationsHeatmap = [{
-	  note: {
-		label: label,
-	  },
-	  x:x, y:y, dy: dy,  dx: dx,
-	  subject: {
-		width: width,
-		height: height
-	  }
-	}]
-	
+
 	const makeAnnotationsHeatmap = d3.annotation()
 	  .type(d3.annotationCalloutRect)
 	  .annotations(annotationsHeatmap);

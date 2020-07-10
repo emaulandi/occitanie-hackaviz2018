@@ -1,11 +1,7 @@
 // DEFINE DRAWING AREA SIZING
-var heightA = 300;
-var widthA = 550;
-var marginA = {top: 50, right: 250, bottom: 30, left: 80};
-
-//GET POPULATION SUM FOR EACH DATE
-var populationSum = [3872177,4240028,4836045,5730753];
-var standard_duration = 6000;
+const heightA = 300;
+const widthA = 550;
+const marginA = {top: 50, right: 250, bottom: 30, left: 80};
 
 // CREATE DRAWING PART MOVED 30,30 FROM SVG
 var selection = d3.select("#A-time-population")

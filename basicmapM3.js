@@ -1,36 +1,12 @@
-// -- USEFULL CATEGORIES -- //
-var revenuCategories = ["0-5k","5-10k","10-15k","15-20k","20-25k","25-30k","30-35k","35-40k"];
-var percLossCategories = ["-100 à -75%","-75 à -50 %","-50 à -25 %","-25 à 0 %","0-25 %","25-50 %","50-100 %","100 % et au delà"];
-var ageCategories = ["0-20 ans","20-30 ans","30-40 ans","40-50 ans","50-60 ans","60-70 ans","70-80 ans","80 ans et +"];
-var ageCategoriesSeuil = [20,30,40,50,60,70,80];
-var revenuCategoriesSeuil = [5000,10000,15000,20000,25000,30000,35000];
-var percLossCategoriesSeuil = [-0.75,-0.50,-0.25,0,0.25,0.50,1];
 
-var catCities = [
-	{"cat":"village","seuilMax":2000},
-	{"cat":"bourg et petite ville","seuilMax":20000},
-	{"cat":"moyenne et grande ville","seuilMax":200000},
-	{"cat":"metropole","seuilMax":Infinity}
-];
-
-// Color scale
-var colorPopulation = d3.scaleLinear().range(["#2c7bb6","#d7191c"]);
-var colorAge = d3.scaleThreshold().range(['#bd0026','#f03b20','#fd8d3c','#feb24c','#fed976','#ffffb2']).domain([20,30,40,50,60,70]);
-var colorRevenu = d3.scaleThreshold().range(['#ffffcc','#a1dab4','#41b6c4','#2c7fb8','#253494']).domain([0,10000,20000,30000,40000]);
-var colorPercLoss = d3.scaleLinear()
-    	.domain([-0.83,0,1,5,10,26])
-    	.range(["#ff8080", "white","#65e765","#00b300","green", "#003300"]);
-var colorHeatRevenu = d3.scaleThreshold().range(['#f1eef6','#bdc9e1','#74a9cf','#1c5d7d','#091f2a']).domain([1,10,100,400]);
-var colorHeatAge = d3.scaleThreshold().range(['#f2f2f2','#ffeab3','#feb24c','#fc6b03','#d72a0f']).domain([1,10,100,400]);
-
-var widthB1 = 650,
+const widthB1 = 650,
     heightB1 = 480;
-var marginB1 = {top: 50, right: 100, bottom: 60, left: 10};
+const marginB1 = {top: 50, right: 100, bottom: 60, left: 10};
 
 
-var heightE = 300;
-var widthE = 300;
-var marginE = {top: 130, right: 200, bottom: 250, left: 70};
+const heightE = 300;
+const widthE = 300;
+const marginE = {top: 130, right: 200, bottom: 250, left: 70};
 
 //Occitanie, France Latitude : 43.892723 | Longitude : 3.282762
 var proj = d3.geoMercator()

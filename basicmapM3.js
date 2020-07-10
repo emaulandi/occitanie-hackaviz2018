@@ -12,22 +12,17 @@ var catCities = [
 	{"cat":"moyenne et grande ville","seuilMax":200000},
 	{"cat":"metropole","seuilMax":Infinity}
 ];
-    
-// Color scale
-//var colorPopulation = d3.scaleQuantize().range(["#2c7bb6", "#00a6ca","#00ccbc","#90eb9d","#ffff8c","#f9d057","#f29e2e","#e76818","#d7191c"]);
-var colorPopulation = d3.scaleLinear().range(["#2c7bb6","#d7191c"]);
-//var colorAge = d3.scaleLinear().range(["#4da6ff", "white"]);
-//var colorAge = d3.scaleLinear().range(['#bd0026','#f03b20','#fd8d3c','#feb24c','#fed976','#ffffb2']).domain([20,30,40,50,60,70]); 
-var colorAge = d3.scaleThreshold().range(['#bd0026','#f03b20','#fd8d3c','#feb24c','#fed976','#ffffb2']).domain([20,30,40,50,60,70]); 
-//var colorRevenu = d3.scaleLinear().range(['#f1eef6','#bdc9e1','#74a9cf','#1c5d7d','#091f2a']).domain([0,10000,20000,30000,40000]); 
 
-var colorRevenu = d3.scaleThreshold().range(['#ffffcc','#a1dab4','#41b6c4','#2c7fb8','#253494']).domain([0,10000,20000,30000,40000]); 
+// Color scale
+var colorPopulation = d3.scaleLinear().range(["#2c7bb6","#d7191c"]);
+var colorAge = d3.scaleThreshold().range(['#bd0026','#f03b20','#fd8d3c','#feb24c','#fed976','#ffffb2']).domain([20,30,40,50,60,70]);
+var colorRevenu = d3.scaleThreshold().range(['#ffffcc','#a1dab4','#41b6c4','#2c7fb8','#253494']).domain([0,10000,20000,30000,40000]);
 var colorPercLoss = d3.scaleLinear()
     	.domain([-0.83,0,1,5,10,26])
     	.range(["#ff8080", "white","#65e765","#00b300","green", "#003300"]);
 var colorHeatRevenu = d3.scaleThreshold().range(['#f1eef6','#bdc9e1','#74a9cf','#1c5d7d','#091f2a']).domain([1,10,100,400]);
 var colorHeatAge = d3.scaleThreshold().range(['#f2f2f2','#ffeab3','#feb24c','#fc6b03','#d72a0f']).domain([1,10,100,400]);
-    	
+
 var widthB1 = 650,
     heightB1 = 480;
 var marginB1 = {top: 50, right: 100, bottom: 60, left: 10};
@@ -51,7 +46,7 @@ var svg1 = d3.select("#B-map")
     .attr("height", heightB1 + marginB1.top + marginB1.bottom)
     .append("g")
 		.attr("transform", "translate(" + marginB1.left + "," + marginB1.top + ")");
-		
+
 var svg2 = d3.select("#D-map")
     .attr("width", widthB1+ marginB1.right + marginB1.left)
     .attr("height", heightB1 + marginB1.top + marginB1.bottom)
@@ -61,17 +56,9 @@ var svg2 = d3.select("#D-map")
 var svg3 = d3.select("#E-chart")
     .attr("width", widthE+ marginE.right + marginE.left)
     .attr("height", heightE + marginE.top + marginE.bottom)
-    .attr("transform", "translate(" + (widthB1 + marginB1.right + marginB1.left + 50) + "," + 0 + ")")
+    //.attr("transform", "translate(" + (widthB1 + marginB1.right + marginB1.left + 50) + "," + 0 + ")")
     .append("g")
 		.attr("transform", "translate(" + marginE.left + "," + marginE.top + ")");
-/*
-svg3.append('rect')
-		.attr('x', 0)
-		.attr('y', 0)
-		.attr('height', 300)
-		.attr('width', 300)
-		.style('fill', 'black');
-*/
 
 // TITLE
 var title1 = d3.select("#B-map")
@@ -82,7 +69,7 @@ var title1 = d3.select("#B-map")
 		.append("text")
 		.attr("class","description")
 		.html("<tspan>Les villages représentent la majeure partie du territoire en terme de superficie</tspan>");
-	
+
 svg2.append("text")
 		.attr("x",5)
         .attr("y",-20)
@@ -107,7 +94,7 @@ var attributes = [
 	{name:"Moyenne d'age"},
 	{name:"Revenu médian par unité de consommation"}
 ];
-// GESTION BOUTON 
+// GESTION BOUTON
 playbuttonD.attr("transform", "translate(" + 0 + "," + 15 + ")");
 playbuttonD.append("input")
 	.attr("type", "button")
@@ -131,37 +118,37 @@ playbuttonD.append("input")
 			  })
 });
 
-		
+
 // PREPARE ANOTATION MAP
 const annotationsMap = [
-	{ note: { 
+	{ note: {
 	  	label: "De très fort taux d'évolution de population autour de Toulouse",
 	  	wrap: 160
-	  }, 
+	  },
 	  x: 240, y:290, dy: -180, dx: -170, subject: { radius: 200, radiusPadding: 10 }
 	},
-	{ note: { 
+	{ note: {
 	  	label: "et Cahors",
 	  	wrap: 160
-	  }, 
+	  },
 	  x: 240, y:150, dy: -30, dx: -90, subject: { radius: 200, radiusPadding: 10 }
 	},
-	{ note: { 
+	{ note: {
 	  	label: "De très fort taux d'évolution autour de Montpellier",
 	  	wrap: 160
-	  }, 
+	  },
 	  x: 520, y:285, dy: -150, dx: 100, subject: { radius: 200, radiusPadding: 0 }
 	},
-	{ note: { 
+	{ note: {
 	  	label: "et Nimes",
 	  	wrap: 160
-	  }, 
+	  },
 	  x: 580, y:245, dy: -80, dx: 80, subject: { radius: 200, radiusPadding: 0 }
 	},
-	{ note: { 
+	{ note: {
 	  	label: "ainsi que Perpignan",
 	  	wrap: 100
-	  }, 
+	  },
 	  x: 405, y:430, dy: -30, dx: 60, subject: { radius: 200, radiusPadding: 0 }
 	}
 	];
@@ -187,20 +174,13 @@ for (i=0; i<revenuCategories.length; i++){
 d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 
 	colorPopulation.domain([
-		d3.min(data.features, function(d) { return d.properties.population_2014; }), 
+		d3.min(data.features, function(d) { return d.properties.population_2014; }),
 		d3.max(data.features, function(d) { return d.properties.population_2014; })
 	]);
-	
-	/*
-	colorRevenu.domain([
-		9958, // min without 0
-		d3.max(data.features, function(d) { return d.properties.médiane_du_revenu_disponible_par_unité_de_consommation_euro; })
-	]);
-	*/
-	
+
 	console.log(d3.min(data.features, function(d) { return d.properties.médiane_du_revenu_disponible_par_unité_de_consommation_euro; }));
 	console.log(d3.max(data.features, function(d) { return d.properties.médiane_du_revenu_disponible_par_unité_de_consommation_euro; }));
-	
+
 	//ADDING PROPERTIES TO THE DATA
 	data.features.forEach( (d) => {
 		d.properties.categorie2014 = getCatCities(d.properties.population_2014);
@@ -215,32 +195,29 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 		if(d.properties.population_1999 == 0) {
 			//console.log("99 d.properties.commune",d.properties.commune);
 			d.properties.population_1968 = d.properties.population_2014;
-		}		
+		}
 		d.properties.percLoss = (d.properties.population_2014 - d.properties.population_1968) / d.properties.population_1968;
-		
+
 		d.catRevenu = getCatRevenu(d.properties.médiane_du_revenu_disponible_par_unité_de_consommation_euro, revenuCategoriesSeuil, revenuCategories);
 		d.catLoss = getCatLoss(d.properties.percLoss, percLossCategoriesSeuil, percLossCategories);
-		
+
 		d.catAge = getCatLoss(d.properties.moyenne_age_H_2014, ageCategoriesSeuil, ageCategories);
-		
+
 		if (d.properties.médiane_du_revenu_disponible_par_unité_de_consommation_euro != 0 ) {
 			updateTabRevenu(tab,[d.catLoss,d.catRevenu]);
 		}
-		
+
 		updateTabAge(tab,[d.catLoss,d.catAge]);
 	})
 
 
 	drawMap(svg1,widthB1,marginB1.top,"Carte de répartition des communes par catégories (2014)",data.features,"categorie");
 	drawMap(svg2,widthB1,marginB1.top,"Carte de répartition des communes par taux d'évolution de la population (1968-2014)",data.features,"percLoss");
-	
+
 	svg2.append("g")
 	  .attr("class", "annotation-group")
 	  .call(makeAnnotationsMap);
-	  
-	//console.log(tab);
 
-	  
 	// GDROP DOWN
 	dropdownbuttonD.on('change', () => {
 
@@ -249,9 +226,9 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 		d3.selectAll(".choose").remove();
 		chooseButtonD1.select("text").text("");
 		cleanHeatmap();
-	
+
 		if (selectedAttribute != attributes[0].name) {
-			
+
 			// CHANGE FILL MAP
 			var attr, cat, title1, title2, subtitle1, subtitle2 ;
 			if (selectedAttribute == "Moyenne d'age"){
@@ -262,8 +239,8 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 				subtitle1 = "Nombre de commune pour chaque catégorie de taux ";
 				subtitle2 = "d'évolution et de moyenne d'age";
 				titleLegend = "Moyenne d'âge";
-				
-				
+
+
 			}
 			else if (selectedAttribute == "Revenu médian par unité de consommation"){
 				attr = "revenu";
@@ -276,27 +253,27 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 			}
 			//CHANGE FILL MAP
 			updateFillMap(svg2,data.features,attr,titleLegend);
-			
+
 			// DRAW HEAT MAP
-			drawHeatmap(title1,title2,subtitle1,subtitle2,attr);		
-			
+			drawHeatmap(title1,title2,subtitle1,subtitle2,attr);
+
 			// AJOUT BOUTON MAP
 			chooseButtonD1.append("input")
 			.attr("type", "button")
 			.attr("class", "choose")
 			.attr("value", "Carte Taux d'évolution")
-			.on("click", function(d) { 
+			.on("click", function(d) {
 				//Clean Legend
 				svg2.selectAll(".legendMap2").remove();
-				updateFillMap(svg2,data.features,"percLoss"); 
+				updateFillMap(svg2,data.features,"percLoss");
 				drawLegendPercLoss(svg2);
 			});
-		
+
 			chooseButtonD2.append("input")
 			.attr("type", "button")
 			.attr("class", "choose")
 			.attr("value", "Carte " + selectedAttribute)
-			.on("click", function(d)  { 
+			.on("click", function(d)  {
 				//Clean Legend
 				svg2.selectAll(".legendMap2").remove();
 				//Update attr and fill
@@ -305,7 +282,7 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 				if (selectedAttribute == "Revenu médian par unité de consommation"){
 					attr = "revenu";
 					titleLegend = "Revenu médian par unité de consomation";
-					
+
 				}
 				else if (selectedAttribute == "Moyenne d'age"){
 					attr = "age";
@@ -315,11 +292,11 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 				//add legend
 				// ** TBD **
 			});
-			
+
 		}
 		// SI AUCUN
 		else {
-			updateFillMap(svg2,data.features,"percLoss"); 
+			updateFillMap(svg2,data.features,"percLoss");
 		}
 	});
 });
@@ -327,10 +304,10 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 // --- UTILITIES FUNCTIONS ----//
 
 function updateFillMap(svg,data,fillattribute,title) {
-	
+
 	//Clean Legend
 	svg.selectAll(".legendMap2").remove();
-	
+
 	svg.selectAll("path")
         .data(data)
         .transition()
@@ -361,22 +338,22 @@ function updateFillMap(svg,data,fillattribute,title) {
         .shapeWidth(15)
         .shapeHeight(15)
         .labelOffset(10);
-    
+
     if (fillattribute == "percLoss"){
 		drawLegendPercLoss(svg);
 	}
 	else {
 		if (fillattribute == "age"){
-			colorLegend.scale(colorAge) 
+			colorLegend.scale(colorAge)
 		}
 		else if (fillattribute == "revenu") {
 			colorLegend.scale(colorRevenu)
-		}    
+		}
 
 		svg2.append("g")
 		    .attr("transform", "translate(" + 520 +"," + 380 + ")")
 		    .attr("class", "legendMap2")
-		    .call(colorLegend);	
+		    .call(colorLegend);
 	}
 
 }
@@ -384,7 +361,7 @@ function updateFillMap(svg,data,fillattribute,title) {
 
 function drawMap(svg,width,margin,subtitle,data,fillattribute) {
 	svg.append("g")
-		.attr("class","villes") 
+		.attr("class","villes")
         .selectAll("path")
         .data(data)
         .enter()
@@ -401,10 +378,10 @@ function drawMap(svg,width,margin,subtitle,data,fillattribute) {
           		return colorPercLoss(d.properties.percLoss)
           	}
           });
-          
+
     drawSubtitleMap(svg,margin,subtitle);
-    
-	if (fillattribute == "categorie"){ 
+
+	if (fillattribute == "categorie"){
 		drawLegendCategorie(svg,width,"Catégorie de commune selon le nombre d'habitants");
 	}
 	else if (fillattribute == "percLoss") {
@@ -440,13 +417,13 @@ function drawLegendCategorie(svg,width,title) {
     svg.append("g")
         .attr("transform", "translate(" + (width-titleWidth+20) +"," + 350 + ")")
         .attr("class", "legend")
-        .call(colorLegend);	
+        .call(colorLegend);
 }
 
 function drawLegendPercLoss(svg) {
 
 	// LINEAR GRADIENT
-	
+
 	//Append a defs (for definition) element to your SVG
 	var defs = svg.append("defs");
 
@@ -462,38 +439,38 @@ function drawLegendPercLoss(svg) {
 		.attr("y2", "0%");
 
 	//Set the color for the start (0%)
-	linearGradient.append("stop") 
-		.attr("offset", "0%")   
+	linearGradient.append("stop")
+		.attr("offset", "0%")
 		.attr("stop-color", "#ff8080");
 
-	linearGradient.append("stop") 
-		.attr("offset", "10%")   
-		.attr("stop-color", "white"); 
-	
-	linearGradient.append("stop") 
-		.attr("offset", "20%")   
-		.attr("stop-color", colorPercLoss(1)); 
-		
-	linearGradient.append("stop") 
-		.attr("offset", "75%")   
-		.attr("stop-color", colorPercLoss(5)); 
-		
-	linearGradient.append("stop") 
-		.attr("offset", "95%")   
+	linearGradient.append("stop")
+		.attr("offset", "10%")
+		.attr("stop-color", "white");
+
+	linearGradient.append("stop")
+		.attr("offset", "20%")
+		.attr("stop-color", colorPercLoss(1));
+
+	linearGradient.append("stop")
+		.attr("offset", "75%")
+		.attr("stop-color", colorPercLoss(5));
+
+	linearGradient.append("stop")
+		.attr("offset", "95%")
 		.attr("stop-color", colorPercLoss(10));
 
 	//Set the color for the end (100%)
-	linearGradient.append("stop") 
-		.attr("offset", "100%")   
-		.attr("stop-color", "#003300"); 
-	
+	linearGradient.append("stop")
+		.attr("offset", "100%")
+		.attr("stop-color", "#003300");
+
 	//Draw the rectangle and fill with gradient
 	var legendzone = svg.append("g").attr("class","legendMap2");
 	var x_offset = 650;
 	var legendPadding = 20 ;
 	var widthColor = 150;
 	var y_offset = 500;
-		
+
 	legendzone.append("rect")
 		.attr("width", widthColor)
 		.attr("height", 13)
@@ -503,23 +480,23 @@ function drawLegendPercLoss(svg) {
 		.attr('transform', 'rotate(-90)')
 		.style("stroke", "lightgrey")
 		.style("fill", "url(#linear-gradient)");
-		
+
 	legendzone.append("text").text("+ 25 000%")
 		.attr('x', x_offset + legendPadding)
 		.attr('y', y_offset - widthColor + 5);
-		
+
 	legendzone.append("text").text("+ 5 000%")
 		.attr('x', x_offset + legendPadding)
 		.attr('y', y_offset - widthColor*0.75 + 5);
-		
+
 	legendzone.append("text").text("+ 100%")
 		.attr('x', x_offset + legendPadding)
 		.attr('y', y_offset - widthColor*0.2 + 5);
-		
+
 	legendzone.append("text").text("0%")
 		.attr('x', x_offset + legendPadding)
 		.attr('y', y_offset - widthColor*0.1 + 5);
-		
+
 	legendzone.append("text").text("- 100%")
 		.attr('x', x_offset + legendPadding)
 		// y_offset = en bas (-500%)
@@ -550,7 +527,7 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
 		value_use = "valueRevenu";
 		categorie = revenuCategories;
 	}
-	
+
 // TITLE SUBTITLE
 	svg3.append("text")
 		.attr("x",-50)
@@ -558,21 +535,21 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
 		.attr("class","descriptionRec")
 			//.text(title);
 		.html(title1);
-		
+
 	svg3.append("text")
 		.attr("x",- 50)
         .attr("y",-65)
 		.attr("class","descriptionRec")
 			//.text(title);
 		.html(title2);
-	
+
 	svg3.append('text')
     	.attr("class", "smallDescription")
         .attr("x",- 50)
         .attr("y",- 45)
         .text(subtitle1)
         .style('text-anchor','start');
-        
+
     svg3.append('text')
     	.attr("class", "smallDescription")
         .attr("x",- 50)
@@ -584,10 +561,10 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
 	var x = d3.scaleBand()
 		.range([0, widthE])
 		.domain(percLossCategories);
-		
+
 	var y = d3.scaleBand()
 		.range([heightE, 0])
-		.domain(categorie); 
+		.domain(categorie);
 		//.domain(revenuCategories);
 
 	var yAxis = d3.axisLeft(y);
@@ -597,23 +574,23 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
 		.attr("transform", "translate(" + 0 + "," + heightE + ")")
 		.attr("class","ax")
 		.call(xAxis)
-		.selectAll("text")	
+		.selectAll("text")
 		    .style("text-anchor", "end")
 		    .attr("dx", "-0.3em")
 		    .attr("dy", "0.5em")
 		    .attr("transform", "rotate(-20)");
-	
+
 	var yAxisSelector = svg3.append("g")
 		.attr("class","ax")
 		.call(yAxis);
 
 // RECTANGLES
 	var cellSize = heightE / revenuCategories.length - 2;
-    
+
     var cells = svg3.selectAll('rect')
         .data(tab)
         .enter().append('g');
-        
+
     cells.append('rect')
         .attr('class', 'cell')
         .attr('width', cellSize)
@@ -623,14 +600,14 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
         .attr('fill', function(d) {
         	if (cat == "age"){
         		//console.log( colorHeatAge(d[value_use]) );
-        		return colorHeatAge(d[value_use]); 
+        		return colorHeatAge(d[value_use]);
         	}
         	else if (cat == "revenu") {
         		//console.log( colorHeatRevenu(d[value_use]) );
-        		return colorHeatRevenu(d[value_use]); 
+        		return colorHeatRevenu(d[value_use]);
         	}
         });
-        
+
 //LEGEND
 	var colorLegend = d3.legendColor()
 		.labelFormat(d3.format("d"))
@@ -643,13 +620,13 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
         .shapeWidth(15)
         .shapeHeight(15)
         .labelOffset(10);
-    
+
     if (cat == "age"){
 		colorLegend.scale(colorHeatAge);
 	}
 	else if (cat == "revenu") {
 		colorLegend.scale(colorHeatRevenu);
-	}    
+	}
 
     svg3.append("g")
         .attr("transform", "translate(" + 0 +"," + (heightE+90) + ")")
@@ -660,7 +637,7 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
 
 	var label, x, y, dy, dx, width, height;
 	if (cat == "age"){
-	
+
 		annotationsHeatmap = [{
 		  note: {
 			label: "Les plus agés localisés dans les communes en baisse de population",
@@ -683,7 +660,7 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
 		}
 		]
 	}
-	else if (cat == "revenu") {	
+	else if (cat == "revenu") {
 		annotationsHeatmap = [{
 		  note: {
 			label: "Les plus hauts revenus dans les communes où la population a plus que doublée",
@@ -694,12 +671,12 @@ function drawHeatmap(title1,title2,subtitle1,subtitle2,cat) {
 			height: 75
 		  }
 		}]
-	} 	
+	}
 
 	const makeAnnotationsHeatmap = d3.annotation()
 	  .type(d3.annotationCalloutRect)
 	  .annotations(annotationsHeatmap);
-	  
+
 	svg3.append("g")
 		.attr("class", "annotation-group")
 		.call(makeAnnotationsHeatmap);
@@ -718,7 +695,6 @@ function getCatCities(population) {
 	if (population < catCities[0].seuilMax) {return catCities[0].cat;}
 	else if (population < catCities[1].seuilMax){return catCities[1].cat;}
 	else if (population < catCities[2].seuilMax){return catCities[2].cat;}
-	//else if (population < catCities[3].seuilMax){return catCities[3].cat;}
 	else {return catCities[3].cat;}
 }
 
@@ -766,4 +742,3 @@ function updateTabAge(tab,t) {
 		if ( (d.x == t[0]) && (d.yAge == t[1]) ) { d.valueAge++; }
 	});
 }
-

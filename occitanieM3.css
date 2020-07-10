@@ -1,6 +1,21 @@
 body {
 	font-family: Helvetica, Arial, sans-serif;
-	margin-top: 40px;/* make room for the nav bar */
+	margin-top: 100px;/* make room for the nav bar */
+}
+
+#content {
+	margin:0 auto;
+	width: 700px;
+}
+
+#credits {
+	margin:0 auto;
+	width: 960px;
+}
+
+#chart-container {
+	display: flex;
+	justify-content: center;
 }
 
 .container-large {
@@ -53,7 +68,6 @@ body {
 	opacity: 0.8;
 }
 
-
 /* SLOPINE CSS */
 .slopeline {
 	stroke-width: 6;
@@ -83,37 +97,9 @@ body {
 }
 
 /* MAP CSS */
-/* 
-A MODIFIER ET VOIR CE QI PEUT VIRER GENRE WIDTH ET HEIGHT
-<div id="container">
-	<div id="carte1"></div>
-	<div id="carte2"></div>
-*/
 
 .legendMap2 text {
 	font-size: 13px;
 	fill: grey ;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-#container1{
-	position: absolute;
-}
-#container2{
-	position: absolute;
-}
-#B-map{
-  /**width:850px;
-  height: 700px;
-  margin-top:-30px;
-  */
-	position: absolute;
-}
-#D-map{
-  /**width:850px;
-  height: 700px;
-  margin-top:-30px;
-  */
-	position: absolute;
-}
-

@@ -358,7 +358,6 @@ function updateFillMap(svg,data,fillattribute,title) {
 
 }
 
-
 function drawMap(svg,width,margin,subtitle,data,fillattribute) {
 	svg.append("g")
 		.attr("class","villes")

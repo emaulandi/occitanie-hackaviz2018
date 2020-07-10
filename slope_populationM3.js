@@ -64,7 +64,7 @@ d3.select("#C-chart").append("g")
 	  .style("text-anchor","end")
 	  .call(makeAnnotationsSlope2);
 
-d3.json("/data/summary_population.json", (data) => {
+d3.json("data/summary_population.json", (data) => {
 	console.log(data);
 
 	var total1968 = 0;

@@ -3,14 +3,14 @@ body {
 	margin-top: 100px;/* make room for the nav bar */
 }
 
-.content {
-	margin:0 auto;
-	width: 700px;
+h1 {
+	font-weight: bold;
+	margin-bottom: 3rem;
 }
 
-#credits {
-	margin:0 auto;
-	width: 960px;
+.content {
+	margin: 0 auto;
+	width: 700px;
 }
 
 .chart-container {
@@ -35,6 +35,14 @@ div.before-chart-title {
     background-color: lightgrey;
     margin-top: 3rem;
 		margin-bottom: 1rem;
+}
+
+footer {
+	background-color: lightgrey;
+	color: grey;
+	font-size: 14px;
+	padding: 50px;
+	margin-top: 50px;
 }
 
 .container-large {

@@ -1,8 +1,8 @@
 // DEFINE DRAWING AREA SIZING
-const heightB2 = 380;
+const heightB2 = 400;
 const widthB2 = 120;
-const marginB2side = 160;
-const marginB2 = {top: stdChartMarginTop, right: 160, bottom: 50, left: 160};
+const marginB2side = 200;
+const marginB2 = {top: stdChartMarginTop, right: marginB2side, bottom: 100, left: marginB2side};
 
 // CREATE DRAWING PART MOVED 30,30 FROM SVG
 var chart = d3.select("#C-chart")
@@ -17,7 +17,7 @@ const annotationsSlope1 = [
 	  	label: "En 1968, 40 % de la population habitait dans un village",
 	  	wrap: 110
 	  },
-	  x: 100, y:180, dy: 20, dx: -45, subject: { radius: 200, radiusPadding: 10 }
+	  x: 140, y:50, dy: 20, dx: -45, subject: { radius: 200, radiusPadding: 10 }
 	}
 ];
 const annotationsSlope2 = [
@@ -25,7 +25,7 @@ const annotationsSlope2 = [
 	  	label: "plus que 29% en 2014, alors que les villages devenus bourgs concernent uniquement 1/10 d'entre eux",
 	  	wrap: 130
 	  },
-	  x: 325, y:265, dy: 15, dx: 55, subject: { radius: 200, radiusPadding: 10 }
+	  x: 385, y:160, dy: 15, dx: 55, subject: { radius: 200, radiusPadding: 10 }
 	}
 ];
 
@@ -73,7 +73,7 @@ d3.json("data/summary_population.json", (data) => {
 	// use same scale for both sides
 	var yScale = d3.scaleLinear()
 		.range([heightB2,0])
-		.domain([0,0.5]);
+		.domain([0,0.42]);
 
 	// Bind data
 	var lines = chart.selectAll('line.slopeline')

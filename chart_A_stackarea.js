@@ -1,7 +1,7 @@
 // DEFINE DRAWING AREA SIZING
 const heightA = 300;
 const widthA = 550;
-const marginA = {top: 50, right: 250, bottom: 30, left: 80};
+const marginA = {top: stdChartMarginTop, right: 250, bottom: 30, left: 80};
 
 // CREATE DRAWING PART MOVED 30,30 FROM SVG
 var selection = d3.select("#A-time-population")
@@ -9,15 +9,6 @@ var selection = d3.select("#A-time-population")
 	.attr("height", heightA + marginA.top + marginA.bottom)
 		.append("g")
 		.attr("transform", "translate(" + marginA.left + "," + marginA.top + ")");
-
-var title = d3.select("#A-time-population")
-	.attr("width", widthA + marginA.right + marginA.left)
-	.attr("height", heightA + marginA.top + marginA.bottom)
-		.append("g")
-		.attr("transform", "translate(" + 15 + "," + 15 + ")")
-		.append("text")
-		.attr("class","description")
-		.html("<tspan>Une forte augmentation de population de 1968 à 2014</tspan>");
 
 var x = d3.scaleLinear()
     .range([0, widthA])

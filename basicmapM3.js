@@ -1,7 +1,7 @@
 
 const widthB1 = 650,
     heightB1 = 480;
-const marginB1 = {top: 50, right: 100, bottom: 60, left: 10};
+const marginB1 = {top: stdChartMarginTop, right: 100, bottom: 60, left: 10};
 
 
 const heightE = 300;
@@ -35,31 +35,6 @@ var svg3 = d3.select("#E-chart")
     //.attr("transform", "translate(" + (widthB1 + marginB1.right + marginB1.left + 50) + "," + 0 + ")")
     .append("g")
 		.attr("transform", "translate(" + marginE.left + "," + marginE.top + ")");
-
-// TITLE
-var title1 = d3.select("#B-map")
-	.attr("width", widthB1+ marginB1.right + marginB1.left)
-    .attr("height", heightB1 + marginB1.top + marginB1.bottom)
-		.append("g")
-		.attr("transform", "translate(" + 15 + "," + marginB1.top  + ")")
-		.append("text")
-		.attr("class","description")
-		.html("<tspan>Les villages représentent la majeure partie du territoire en terme de superficie</tspan>");
-
-svg2.append("text")
-		.attr("x",5)
-        .attr("y",-20)
-		.attr("class","description")
-			//.text(title);
-		.html("Une augmentation de population très marquée autour des métropoles");
-
-svg2.append("text")
-		.attr("x",5)
-        .attr("y",5)
-		.attr("class","description")
-			//.text(title);
-		.html("et grandes villes, ou le phénomène de périurbanisation");
-
 
 var playbuttonD = d3.select("#playButtonD");
 var chooseButtonD1 = d3.select("#chooseButtonD1");
@@ -187,8 +162,8 @@ d3.json("data/TDV-hackaviz_2018.geojson", function (data) {
 	})
 
 
-	drawMap(svg1,widthB1,marginB1.top,"Carte de répartition des communes par catégories (2014)",data.features,"categorie");
-	drawMap(svg2,widthB1,marginB1.top,"Carte de répartition des communes par taux d'évolution de la population (1968-2014)",data.features,"percLoss");
+	drawMap(svg1,widthB1,marginB1.top,data.features,"categorie");
+	drawMap(svg2,widthB1,marginB1.top,data.features,"percLoss");
 
 	svg2.append("g")
 	  .attr("class", "annotation-group")
@@ -334,7 +309,7 @@ function updateFillMap(svg,data,fillattribute,title) {
 
 }
 
-function drawMap(svg,width,margin,subtitle,data,fillattribute) {
+function drawMap(svg,width,margin,data,fillattribute) {
 	svg.append("g")
 		.attr("class","villes")
         .selectAll("path")
@@ -354,23 +329,12 @@ function drawMap(svg,width,margin,subtitle,data,fillattribute) {
           	}
           });
 
-    drawSubtitleMap(svg,margin,subtitle);
-
 	if (fillattribute == "categorie"){
 		drawLegendCategorie(svg,width,"Catégorie de commune selon le nombre d'habitants");
 	}
 	else if (fillattribute == "percLoss") {
 		drawLegendPercLoss(svg);
 	}
-}
-
-function drawSubtitleMap(svg,margin,subtitle) {
-   svg.append('text')
-    	.attr("class", "smallDescription")
-        .attr("x",7)
-        .attr("y",2*margin/4)
-        .text(subtitle)
-        .style('text-anchor','start');
 }
 
 function drawLegendCategorie(svg,width,title) {
@@ -440,11 +404,12 @@ function drawLegendPercLoss(svg) {
 		.attr("stop-color", "#003300");
 
 	//Draw the rectangle and fill with gradient
-	var legendzone = svg.append("g").attr("class","legendMap2");
-	var x_offset = 650;
-	var legendPadding = 20 ;
-	var widthColor = 150;
-	var y_offset = 500;
+	let legendzone = svg.append("g").attr("class","legendMap2");
+	const legend_side = 50;
+	const x_offset = widthB1 - marginB1.left - legend_side;
+	const y_offset = 500;
+	const legendPadding = 20 ;
+	const widthColor = 150;
 
 	legendzone.append("rect")
 		.attr("width", widthColor)

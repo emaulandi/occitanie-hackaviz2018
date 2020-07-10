@@ -1,30 +1,15 @@
 // DEFINE DRAWING AREA SIZING
 const heightB2 = 380;
 const widthB2 = 120;
-const marginB2top = 100;
 const marginB2side = 160;
+const marginB2 = {top: stdChartMarginTop, right: 160, bottom: 50, left: 160};
 
 // CREATE DRAWING PART MOVED 30,30 FROM SVG
 var chart = d3.select("#C-chart")
-	.attr("width", widthB2 + 2*marginB2side)
-	.attr("height", heightB2 + 2*marginB2top)
-	.attr("transform", "translate(" + "," + 20 + ")")
+	.attr("width", widthB2 + marginB2.right + marginB2.left)
+	.attr("height", heightB2 + marginB2.top + marginB2.bottom)
 		.append("g")
-		.attr("transform", "translate(" + (marginB2side) + "," + marginB2top + ")");
-
-
-// create a text wrapping function
-var wrap = d3.textwrap()
-	.bounds({height: 150, width: widthB2+ 2*marginB2side});
-
-var titleB2 = d3.select("#C-chart")
-		.append("g")
-		.attr("class","description")
-		.append("text")
-		.text("Les villages représentaient la plus grande proportion d'habitants en 1968, mais les bourgs et petites villes sont prépondérantes en proportion en 2014");
-
-var text = d3.selectAll('.description');
-text.call(wrap);
+		.attr("transform", "translate(" + marginB2.left + "," + marginB2.top + ")");
 
 // PREPARE ANOTATION MAP
 const annotationsSlope1 = [
@@ -75,15 +60,15 @@ d3.json("data/summary_population.json", (data) => {
 		total2014 += d.sum2014;
 	});
 
-	console.log("total1968: ",total1968);
-	console.log("total2014: ",total2014);
+	//console.log("total1968: ",total1968);
+	//console.log("total2014: ",total2014);
 
 	data.forEach( (d) => {
 		d.proportion1968 = d.sum1968 / total1968;
 		d.proportion2014 = d.sum2014 / total2014;
 	});
 
-	console.log(data);
+	//console.log(data);
 
 	// use same scale for both sides
 	var yScale = d3.scaleLinear()
@@ -95,20 +80,20 @@ d3.json("data/summary_population.json", (data) => {
 	.data(data)
 	.enter()
 	.append('line')
-	.attr("class", "slopeline")
-	.attr("x1",0)
-	.attr("x2",widthB2)
-	.attr("y1",
-		(d,i) => {return yScale(d.proportion1968);})
-	.attr("y2",
-		(d,i) => {return yScale(d.proportion2014);})
-	.style("stroke",
-		(d,i) => {return colorCat(d.categorie);})
+		.attr("class", "slopeline")
+		.attr("x1",0)
+		.attr("x2",widthB2)
+		.attr("y1",
+			(d,i) => {return yScale(d.proportion1968);})
+		.attr("y2",
+			(d,i) => {return yScale(d.proportion2014);})
+		.style("stroke",
+			(d,i) => {return colorCat(d.categorie);})
 
 	// CALL Y AXIS
 	//chart.append("g").call(d3.axisRight(yScale));
 
-	// LABELS FOR THE COUNTRIES
+	// LABELS FOR THE PERCENTAGES
 	var leftLabels = chart.selectAll(".labelsleft")
 	.data(data)
 	.enter()
@@ -121,7 +106,7 @@ d3.json("data/summary_population.json", (data) => {
         .style('text-anchor','end')
         .attr("transform", "translate(" + (-10) + ",0)");
 
-    var rightLabels = chart.selectAll(".labelsright")
+  var rightLabels = chart.selectAll(".labelsright")
 	.data(data)
 	.enter()
 	.append('text')
@@ -147,11 +132,4 @@ d3.json("data/summary_population.json", (data) => {
         .attr("y",heightB2+20)
         .text("2014")
         .style('text-anchor','end');
-
-   var subtitle = chart.append('text')
-    	.attr("class", "smallDescription")
-        .attr("x",-marginB2side)
-        .attr("y",0)
-        .text("Pourcentage d'habitants par catégorie")
-        .style('text-anchor','start');
 });

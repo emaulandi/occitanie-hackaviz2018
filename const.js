@@ -35,3 +35,6 @@ const colorHeatAge = d3.scaleThreshold().range(['#f2f2f2','#ffeab3','#feb24c','#
 // -- To be redone (out of code but light to load)
 const populationSum = [3872177,4240028,4836045,5730753];
 const standard_duration = 6000;
+
+// -- CHART CONST -- //
+const stdChartMarginTop = 30;

@@ -3,7 +3,7 @@ body {
 	margin-top: 100px;/* make room for the nav bar */
 }
 
-#content {
+.content {
 	margin:0 auto;
 	width: 700px;
 }
@@ -13,9 +13,28 @@ body {
 	width: 960px;
 }
 
-#chart-container {
+.chart-container {
 	display: flex;
 	justify-content: center;
+}
+
+.chart-title {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 0;
+}
+
+.chart-subtitle {
+	font-size: 14px;
+	color: grey;
+}
+
+div.before-chart-title {
+    height: .5rem;
+    width: 20rem;
+    background-color: lightgrey;
+    margin-top: 3rem;
+		margin-bottom: 1rem;
 }
 
 .container-large {
